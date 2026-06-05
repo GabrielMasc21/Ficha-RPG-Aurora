@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Personagem - Aurora de Sangue</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Courier+Prime&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0f0f0f 100%);
+            color: #e8d9c8;
+            font-family: 'Crimson Text', serif;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(139, 0, 0, 0.03) 0px,
+                    rgba(139, 0, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                ),
+                radial-gradient(
+                    ellipse at 20% 50%,
+                    rgba(139, 0, 0, 0.1) 0%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    ellipse at 80% 80%,
+                    rgba(75, 0, 130, 0.1) 0%,
+                    transparent 50%
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #8b0000;
+        }
+
+        header::after {
+            content: '◆ ◆ ◆';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #8b0000;
+            font-size: 12px;
+            letter-spacing: 8px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: normal;
+            letter-spacing: 4px;
+            color: #c71585;
+            text-shadow: 0 0 10px rgba(199, 21, 133, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #8b0000;
+            text-transform: uppercase;
+        }
+
+        .grid-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: linear-gradient(135deg, rgba(20, 10, 20, 0.8) 0%, rgba(40, 20, 40, 0.6) 100%);
+            border: 1px solid #8b0000;
+            border-left: 3px solid #c71585;
+            padding: 25px;
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c71585, transparent);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #c71585;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #8b0000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .field-group {
+            margin-bottom: 15px;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .field-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: #b8860b;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #8b0000;
+            color: #e8d9c8;
+            padding: 10px;
+            font-family: 'Crimson Text', serif;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: #c71585;
+            box-shadow: 0 0 10px rgba(199, 21, 133, 0.2);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .attributes-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .attribute-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #8b0000;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .attribute-name {
+            font-size: 11px;
+            color: #b8860b;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .attribute-input {
+            width: 100%;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+            color: #c71585;
+        }
+
+        .sanity-bar {
+            background: linear-gradient(90deg, #8b0000 0%, #c71585 100%);
+            height: 30px;
+            border: 1px solid #8b0000;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .sanity-label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #e8d9c8;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .origin-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .origin-option {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #8b0000;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .origin-option:hover {
+            background: rgba(139, 0, 0, 0.1);
+            border-left-color: #c71585;
+        }
+
+        .origin-option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .origin-name {
+            font-weight: bold;
+            color: #c71585;
+            font-size: 13px;
+        }
+
+        .traits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .traits-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .trait-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #8b0000;
+            color: #e8d9c8;
+            padding: 8px;
+            font-family: 'Crimson Text', serif;
+            font-size: 12px;
+        }
+
+        .wide-section {
+            grid-column: 1 / -1;
+        }
+
+        .equipment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .equipment-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid #c71585;
+            padding: 12px;
+            font-size: 13px;
+        }
+
+        .equipment-item strong {
+            color: #b8860b;
+        }
+
+        .footer-decorative {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #8b0000;
+            color: #8b0000;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        .print-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #8b0000, #c71585);
+            border: 1px solid #c71585;
+            color: #e8d9c8;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-family: 'Crimson Text', serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .print-button:hover {
+            box-shadow: 0 0 20px rgba(199, 21, 133, 0.5);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .grid-sections {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .attributes-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .traits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            body::before {
+                display: none;
+            }
+
+            .print-button {
+                display: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FICHA DE PERSONAGEM</h1>
+            <p class="subtitle">Aurora de Sangue • RPG de Sobrevivência Paranormal</p>
+        </header>
+
+        <div class="grid-sections">
+            <!-- IDENTIDADE -->
+            <div class="section">
+                <div class="section-title">Identidade</div>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label>Nome</label>
+                        <input type="text" placeholder="Nome do personagem">
+                    </div>
+                    <div class="field-group">
+                        <label>Idade</label>
+                        <input type="number" placeholder="Anos">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label>Nacionalidade</label>
+                        <input type="text" placeholder="País de origem">
+                    </div>
+                    <div class="field-group">
+                        <label>Apelido/Título</label>
+                        <input type="text" placeholder="Como chamam você?">
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label>Estado Mental Atual</label>
+                    <input type="text" placeholder="Descrição breve">
+                </div>
+                <div class="field-group">
+                    <label>Crença</label>
+                    <input type="text" placeholder="Religião ou filosofia">
+                </div>
+            </div>
+
+            <!-- ORIGEM -->
+            <div class="section">
+                <div class="section-title">Origem</div>
+                <label style="margin-bottom: 15px; color: #c71585;">Sobrevivência na Aurora de Sangue:</label>
+                <div class="origin-options">
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="scientist">
+                        <span class="origin-name">Cientista do Eden</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="military">
+                        <span class="origin-name">Militar Enviado para Contenção</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="civil">
+                        <span class="origin-name">Civil</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="cultist">
+                        <span class="origin-name">Cultista</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="hunter">
+                        <span class="origin-name">Caçador</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="corporate">
+                        <span class="origin-name">Funcionário da Corporação</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="researcher">
+                        <span class="origin-name">Pesquisador</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="origin" value="thief">
+                        <span class="origin-name">Ladrão</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- ATRIBUTOS -->
+            <div class="section wide-section">
+                <div class="section-title">Atributos (Distribua 15 pontos)</div>
+                <div class="attributes-grid">
+                    <div class="attribute-box">
+                        <div class="attribute-name">Força</div>
+                        <input type="number" class="attribute-input" min="0" max="10" value="0">
+                    </div>
+                    <div class="attribute-box">
+                        <div class="attribute-name">Agilidade</div>
+                        <input type="number" class="attribute-input" min="0" max="10" value="0">
+                    </div>
+                    <div class="attribute-box">
+                        <div class="attribute-name">Inteligência</div>
+                        <input type="number" class="attribute-input" min="0" max="10" value="0">
+                    </div>
+                    <div class="attribute-box">
+                        <div class="attribute-name">Percepção</div>
+                        <input type="number" class="attribute-input" min="0" max="10" value="0">
+                    </div>
+                    <div class="attribute-box">
+                        <div class="attribute-name">Controle</div>
+                        <input type="number" class="attribute-input" min="0" max="10" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SANIDADE -->
+            <div class="section wide-section">
+                <div class="section-title">Sanidade Mental</div>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px;">
+                    <div class="field-group">
+                        <label>Sanidade Atual (%)</label>
+                        <input type="number" min="0" max="100" value="100" style="font-size: 24px; text-align: center; color: #c71585;">
+                    </div>
+                    <div>
+                        <label style="margin-bottom: 10px;">Barra de Sanidade</label>
+                        <div class="sanity-bar">
+                            <span class="sanity-label">●●●●●●●●●●</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONALIDADE -->
+            <div class="section">
+                <div class="section-title">Personalidade</div>
+                
+                <div class="field-group">
+                    <label>Traços (5)</label>
+                    <div class="traits-column">
+                        <input type="text" class="trait-input" placeholder="Traço 1">
+                        <input type="text" class="trait-input" placeholder="Traço 2">
+                        <input type="text" class="trait-input" placeholder="Traço 3">
+                        <input type="text" class="trait-input" placeholder="Traço 4">
+                        <input type="text" class="trait-input" placeholder="Traço 5">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Qualidades (2)</label>
+                    <div class="traits-column">
+                        <input type="text" class="trait-input" placeholder="Qualidade 1">
+                        <input type="text" class="trait-input" placeholder="Qualidade 2">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Defeitos (2)</label>
+                    <div class="traits-column">
+                        <input type="text" class="trait-input" placeholder="Defeito 1">
+                        <input type="text" class="trait-input" placeholder="Defeito 2">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Trauma (1)</label>
+                    <textarea placeholder="Descreva o trauma do personagem"></textarea>
+                </div>
+            </div>
+
+            <!-- MEDO E OBJETIVO -->
+            <div class="section">
+                <div class="section-title">Psicologia</div>
+                
+                <div class="field-group">
+                    <label>Medo (Causa perda de 15% de Sanidade)</label>
+                    <textarea placeholder="Descreva algo que aterroriza profundamente seu personagem"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label>Objetivo</label>
+                    <textarea placeholder="O que mantém seu personagem em movimento?"></textarea>
+                </div>
+            </div>
+
+            <!-- EQUIPAMENTOS -->
+            <div class="section wide-section">
+                <div class="section-title">Equipamentos Iniciais</div>
+                <div class="equipment-list">
+                    <div class="equipment-item">
+                        <strong>1. Arma Principal</strong><br>
+                        <input type="text" placeholder="Tipo e descrição da arma" style="width: 100%; margin-top: 8px;">
+                        <small style="color: #8b0000; margin-top: 5px; display: block;">Militares: limite de 50 munições</small>
+                    </div>
+                    <div class="equipment-item">
+                        <strong>2. Item Pessoal</strong><br>
+                        <input type="text" placeholder="Serve para recuperar ou manter sanidade" style="width: 100%; margin-top: 8px;">
+                    </div>
+                    <div class="equipment-item">
+                        <strong>3. Item de Proteção</strong><br>
+                        <input type="text" placeholder="Símbolo, amuleto, tecnologia ou equipamento especial" style="width: 100%; margin-top: 8px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTATOS E VÍNCULOS -->
+            <div class="section">
+                <div class="section-title">Contato Paranormal</div>
+                <label style="margin-bottom: 10px;">Teve contato direto com o paranormal?</label>
+                <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+                    <label style="color: #e8d9c8;">
+                        <input type="radio" name="paranormal" value="sim"> Sim
+                    </label>
+                    <label style="color: #e8d9c8;">
+                        <input type="radio" name="paranormal" value="nao"> Não
+                    </label>
+                </div>
+                <textarea placeholder="Descrição detalhada do contato (se aplicável)"></textarea>
+            </div>
+
+            <!-- INTERFACES DO EDEN -->
+            <div class="section">
+                <div class="section-title">Interface do Eden</div>
+                <label style="margin-bottom: 10px; display: block;">Qual habilidade especial possui?</label>
+                <div class="origin-options">
+                    <label class="origin-option">
+                        <input type="radio" name="interface" value="hackear">
+                        <span class="origin-name">Hackear Sistemas</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="interface" value="frequencias">
+                        <span class="origin-name">Ler Frequências</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="interface" value="exposto">
+                        <span class="origin-name">Exposto</span>
+                    </label>
+                    <label class="origin-option">
+                        <input type="radio" name="interface" value="nenhuma">
+                        <span class="origin-name">Nenhuma</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- APARÊNCIA -->
+            <div class="section wide-section">
+                <div class="section-title">Aparência</div>
+                <textarea placeholder="Descreva livremente a aparência do personagem: altura, construção física, cicatrizes, tatuagens, marcas, roupa, cabelo, expressão..."></textarea>
+            </div>
+
+            <!-- VÍNCULO -->
+            <div class="section wide-section">
+                <div class="section-title">Vínculo com Ela</div>
+                <div class="field-group">
+                    <label>Notas sobre conexão com subordinados de Ela</label>
+                    <textarea placeholder="A nacionalidade do personagem o conecta com alguém específico? Qual é a relação?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-decorative">
+            ◆ ◆ ◆  A sanidade é um luxo que você não pode mais se permitir  ◆ ◆ ◆
+        </div>
+    </div>
+
+    <button class="print-button" onclick="window.print()">📋 Imprimir Ficha</button>
+</body>
+</html>
