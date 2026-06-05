@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora de Sangue - Fichas de RPG</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Courier+Prime&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0f0f0f 100%);
+            color: #e8d9c8;
+            font-family: 'Crimson Text', serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(139, 0, 0, 0.03) 0px,
+                    rgba(139, 0, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                ),
+                radial-gradient(
+                    ellipse at 20% 50%,
+                    rgba(139, 0, 0, 0.1) 0%,
+                    transparent 50%
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #8b0000;
+        }
+        h1 {
+            font-size: 56px;
+            font-weight: normal;
+            letter-spacing: 4px;
+            color: #c71585;
+            text-shadow: 0 0 20px rgba(199, 21, 133, 0.3);
+            margin-bottom: 15px;
+        }
+        .subtitle {
+            font-family: 'Courier Prime', monospace;
+            font-size: 13px;
+            letter-spacing: 2px;
+            color: #8b0000;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            font-size: 16px;
+            color: #b8860b;
+            font-style: italic;
+            margin-top: 20px;
+        }
+        .card {
+            background: linear-gradient(135deg, rgba(20, 10, 20, 0.9) 0%, rgba(40, 20, 40, 0.7) 100%);
+            border: 1px solid #8b0000;
+            border-left: 4px solid #c71585;
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c71585, transparent);
+        }
+        .card:hover {
+            border-left-color: #ff69b4;
+            box-shadow: 0 0 20px rgba(199, 21, 133, 0.2);
+            transform: translateX(5px);
+        }
+        .card-title {
+            font-size: 24px;
+            color: #c71585;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .card-description {
+            color: #d4af9a;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .card-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b0000, #c71585);
+            color: #e8d9c8;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-family: 'Crimson Text', serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #c71585;
+            transition: all 0.3s ease;
+        }
+        .card-button:hover {
+            box-shadow: 0 0 15px rgba(199, 21, 133, 0.5);
+            transform: scale(1.02);
+        }
+        .info-section {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px dashed #8b0000;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 3px;
+        }
+        .info-section h3 {
+            color: #b8860b;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+        .info-section p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #8b0000;
+            color: #8b0000;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <p class="subtitle">RPG de Sobrevivência Paranormal</p>
+            <h1>AURORA DE SANGUE</h1>
+            <p class="tagline">Quando a Aurora chega, a sanidade é um luxo que você não pode mais se permitir</p>
+        </header>
+
+        <div class="content">
+            <div class="card">
+                <div class="card-title">📋 Criar Nova Ficha de Personagem</div>
+                <div class="card-description">
+                    Crie seu personagem para Aurora de Sangue. Preencha a ficha, escolha sua origem, distribua seus atributos e prepare-se para o horror que aguarda.
+                </div>
+                <a href="ficha.html" class="card-button">Acessar Ficha</a>
+            </div>
+
+            <div class="info-section">
+                <h3>📖 Como Usar</h3>
+                <p><strong>1. Acessar a Ficha:</strong> Clique em "Acessar Ficha" acima para abrir a página de criação de personagem.</p>
+                <p><strong>2. Preencher Dados:</strong> Complete todos os campos com as informações do seu personagem.</p>
+                <p><strong>3. Salvar/Imprimir:</strong> Use Ctrl+S para salvar como arquivo, ou clique no botão "Imprimir Ficha" para gerar um PDF.</p>
+            </div>
+
+            <div class="info-section">
+                <h3>🎮 Sobre Aurora de Sangue</h3>
+                <p>Aurora de Sangue é um RPG de horror paranormal onde você sobreviveu ao colapso do Projeto Eden. Escolha sua Origem, gerencie sua Sanidade e enfrente os horrores que o cercam.</p>
+            </div>
+        </div>
+
+        <footer>
+            ◆ ◆ ◆ Desenvolvido para Aurora de Sangue RPG ◆ ◆ ◆
+        </footer>
+    </div>
+</body>
+</html>
